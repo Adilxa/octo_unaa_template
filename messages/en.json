@@ -1,0 +1,15 @@
+{
+  "HomePage": {
+    "title": "Hello world!",
+    "button": "Click me!"
+  },
+  "ExampleScreen": {
+    "title": "Example screen",
+    "description": "This is an example screen. You can find it in the 'components/screens' folder."
+  },
+  "LocaleSwitcher": {
+    "en": "English",
+    "ru": "Русский",
+    "label": "Language"
+  }
+}

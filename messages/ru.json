@@ -1,0 +1,15 @@
+{
+  "HomePage": {
+    "title": "Привет, мир!",
+    "button": "Нажми меня!"
+  },
+  "ExampleScreen": {
+    "title": "Пример экрана",
+    "description": "Это пример экрана. Вы можете найти его в папке 'components/screens'."
+  },
+  "LocaleSwitcher": {
+    "en": "English",
+    "ru": "Русский",
+    "label": "Язык"
+  }
+}

@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Onest:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+html, body {
+  font-family: 'Onest', sans-serif;
+}
+
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-gradient {
+  background: radial-gradient(256.67% 245.18% at 197.69% 190.36%, #0A63F0 0%, #171928 51.94%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #0A63F0;
+  border-radius: 4px;
+  border: 2px solid #01030E;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: #01030E;
+  border-radius: 10px;
+}
+
+.scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+  background-color: #0A63F0;
+  border-radius: 4px;
+  border: 2px solid #01030E;
+}
+
+.scrollable::-webkit-scrollbar-track {
+  background-color: #01030E;
+  border-radius: 10px;
+}
+
+.scroll-x {
+  margin-bottom: 16px; /* или сколько нужно */
+}
+
+.scroll-x::-webkit-scrollbar {
+  height: 6px; /* толщина горизонтального скролла */
+}
+
+.scroll-x::-webkit-scrollbar-thumb {
+  background-color: #0A63F0;
+  border-radius: 4px;
+  border: 2px solid #01030E;
+}
+
+.scroll-x::-webkit-scrollbar-track {
+  background-color: #01030E;
+  border-radius: 10px;
+}
+
+
+.rounded-tab {
+  --r: 16px; /* control the radius */
+
+  padding-inline: .5em;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  border-inline: var(--r) solid #0000;
+  border-radius: calc(2 * var(--r)) calc(2 * var(--r)) 0 0/var(--r);
+  mask: radial-gradient(var(--r) at var(--r) 0, #0000 98%, #000 101%) calc(-1 * var(--r)) 100%/100% var(--r) repeat-x,
+  conic-gradient(#000 0 0) padding-box;
+}
+
+.first {
+  --r: 16px; /* control the radius */
+
+  padding-inline: .5em;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  border-right: var(--r) solid #0000;
+  /*border-radius: var(--r) calc(2 * var(--r)) 0 0/var(--r);*/
+  mask: radial-gradient(var(--r) at 100% 0, #0000 98%, #000 101%) 100% 100%/var(--r) var(--r) no-repeat,
+  conic-gradient(#000 0 0) padding-box;
+  margin-left: -16px;
+}
+
+
+@layer base {
+  :root {
+    --background: 222 89% 3%; /* #01030e */
+    --foreground: 210 40% 98%;
+    --card: 222 24% 10%; /* #131520 */
+    --card-foreground: 210 40% 98%;
+    --popover: 222 24% 10%; /* #131520 */
+    --popover-foreground: 210 40% 98%;
+    --primary: 217 94% 49%; /* #0A63F0 */
+    --primary-foreground: 210 40% 98%;
+    --secondary: 199 64% 47%; /* #2b97c3 */
+    --secondary-foreground: 210 40% 98%;
+    --muted: 222 24% 10%; /* #131520 */
+    --muted-foreground: 215 20% 65%;
+    --accent: 199 64% 47%; /* #2b97c3 */
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 222 24% 10%; /* #131520 */
+    --input: 222 24% 10%; /* #131520 */
+    --ring: 217 94% 49%; /* #0A63F0 */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}

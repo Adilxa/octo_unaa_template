@@ -1,0 +1,30 @@
+.form_filed {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  .icon {
+    position: absolute;
+    left: 0.7rem;
+  }
+
+  input[type="text"] {
+    display: inline-block;
+    background-color: #131520;
+    width: 100%;
+    font-size: 1rem;
+    padding-left: 2.5rem;
+    outline: none;
+    border-radius: 6px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+
+    //
+    min-width: 400px;
+    //
+
+    &::placeholder {
+      color: #aaa; // Цвет текста placeholder
+    }
+  }
+}
