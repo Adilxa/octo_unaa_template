@@ -26,6 +26,7 @@ import BarcodeScannerModal from './BarcodeScannerModal';
 
 interface OrderResponse {
   id: number;
+  code_order: string;
   client_name: string;
   client_phone: string;
   employee_name: string;
@@ -421,6 +422,7 @@ const NewWashingBtn = () => {
             client_name: orderDetails.client_name,
             queue_position: orderDetails.queue_position,
             status: orderDetails.status,
+            code_order: orderDetails.code_order,
           }}
         />
       )}

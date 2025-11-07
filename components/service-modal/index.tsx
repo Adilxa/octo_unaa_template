@@ -25,7 +25,11 @@ const fetchServices = async (categoryId?: string): Promise<any> => {
     res = await $api.get(`/services/service-categories/${categoryId}/services/`);
   } else {
     // Если выбраны все категории, используем стандартный маршрут
-    res = await $api.get('/services/list/');
+    res = await $api.get('/services/list/', {
+      params: {
+        size: 1000,
+      }
+    });
   }
 
   return res.data;

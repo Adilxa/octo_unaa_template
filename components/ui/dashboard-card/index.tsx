@@ -59,10 +59,10 @@ const DashboardCard: React.FC<Props> = ({ title, icon, api, value, description, 
         {icon}
       </div>
       {api == 'expenses/orders/stats/' ? (
-        <div className='text-[40px] font-bold text-white'>{data.completed_orders}</div>
+        <div className='text-[40px] font-bold text-white'>{data?.completed_orders}</div>
       ) : (
         <div className='text-[40px] font-bold text-white'>
-          {data.total_profit || data.total_sum} сом
+          {data?.total_profit || data?.total_sum} сом
         </div>
       )}
     </div>

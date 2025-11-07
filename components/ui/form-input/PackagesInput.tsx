@@ -89,7 +89,7 @@ const PackagesInput: React.FC<Props> = ({ title, placeholder, onChange, carBodyT
   return (
     <div className='flex flex-col gap-3'>
       {packages.map((pkg, index) => (
-        <div key={index} className='flex items-center justify-between gap-[10rem]'>
+        <div key={index} className='flex items-center justify-between gap-[5rem]'>
           <h1 className='w-[60px] whitespace-nowrap text-[14px] font-semibold text-white'>
             {index === 0 ? title : ''}
           </h1>

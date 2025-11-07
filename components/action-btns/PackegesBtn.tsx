@@ -36,7 +36,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import NewPackageCategory from './newPackageCategory';
 
 const fetchServiceList = async () => {
-  const res = await $api.get('/services/list/?is_active=true');
+  const res = await $api.get('/services/list/?is_active=true', {
+    params: {
+      size: 1000,
+    }
+  });
   return res.data;
 };
 

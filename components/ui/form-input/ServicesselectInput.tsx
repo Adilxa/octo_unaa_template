@@ -18,7 +18,11 @@ interface Props {
 }
 
 const fetchCategories = async () => {
-  const res = await $api.get('/services/list/');
+  const res = await $api.get('/services/list/', {
+    params: {
+      size: 1000,
+    }
+  });
   return res.data;
 };
 
