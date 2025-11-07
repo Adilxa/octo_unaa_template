@@ -39,7 +39,7 @@ const fetchServiceList = async () => {
   const res = await $api.get('/services/list/?is_active=true', {
     params: {
       size: 1000,
-    }
+    },
   });
   return res.data;
 };

@@ -1,6 +1,7 @@
 import $api from '@/api/http';
 import { useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
+import Cookies from 'js-cookie';
 import { Ban, Check, CheckCheck, CirclePlay, Copy, Printer } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 import { QRCodeSVG } from 'qrcode.react';
@@ -8,7 +9,6 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
-import Cookies from 'js-cookie';
 
 // Define the type for the order data based on the API response
 interface WashingOrderData {
@@ -94,12 +94,10 @@ const WashingOrderDetailsDialog: React.FC<WashingOrderDetailsDialogProps> = ({
   const data = detailedData || orderData;
   const isInProgress = tab === 'inprogress';
 
-
   const token = Cookies.get('access_token');
   // Generate QR code URL
 
   const trackingUrl = `https://octo-mobile.vercel.app/tracking/track/${data?.code_order}?token=${token}&domain=ilovedaniyal.click`;
-
 
   const onStart = async (id: number) => {
     try {

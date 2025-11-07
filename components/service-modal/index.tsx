@@ -28,7 +28,7 @@ const fetchServices = async (categoryId?: string): Promise<any> => {
     res = await $api.get('/services/list/', {
       params: {
         size: 1000,
-      }
+      },
     });
   }
 

@@ -1,9 +1,9 @@
+import Cookies from 'js-cookie';
 import { Copy } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
 import React from 'react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
-import Cookies from 'js-cookie';
 import {
   Dialog,
   DialogClose,
@@ -42,13 +42,12 @@ const QrCodeModal: React.FC<QrCodeModalProps> = ({
     return match ? match[1] : '';
   };
 
-
   // Get the websocket ID
   const websocketId = extractWebsocketId(websocketUrl);
 
   const token = Cookies.get('access_token');
   // Create the tracking URL using a path parameter (most reliable with QR codes)
-  console.log(orderDetails, websocketId, "--------------------------------hhhehehhe");
+  console.log(orderDetails, websocketId, '--------------------------------hhhehehhe');
   const trackingUrl = `https://octo-mobile.vercel.app/tracking/track/${orderDetails?.code_order}?token=${token}&domain=ilovedaniyal.click`;
 
   const copyToClipboard = () => {
