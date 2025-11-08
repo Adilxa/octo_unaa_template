@@ -230,15 +230,21 @@ const PackegesBtn = () => {
         setOpen(false);
       });
       queryClient.invalidateQueries(['packageList']);
+
+      // Полный сброс всех состояний
       setTitle('');
       setCategory('');
+      setKuzov('');
       setDescription('');
-      setPickedData([]);
+      setSelectedOption('washing');
+      setPickedData({
+        services: [],
+        materials: [],
+      });
     } catch (error) {
       toast('Ошибка при создании пакета');
       console.error(error);
       const packageData = preparePackageData();
-
       console.log(packageData);
     }
   };
