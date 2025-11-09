@@ -377,6 +377,7 @@ const NewWashingBtn = () => {
                 {formErrors.phone && <p className='mt-1 text-xs text-red-500'>{`996**********`}</p>}
               </div>
               <EmployeesSelect
+                position={'washer'}
                 title={'Мойщик'}
                 placeholder={'Выберете мойщика'}
                 value={employee}

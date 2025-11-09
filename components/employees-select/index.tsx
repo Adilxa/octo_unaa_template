@@ -16,6 +16,7 @@ interface Props {
   placeholder: string;
   value: any;
   onChange?: (value: string) => void;
+  position: string;
 }
 
 interface Brand {
@@ -24,11 +25,15 @@ interface Brand {
 }
 
 const fetchCategories = async () => {
-  const res = await $api.get('/employee/employees/');
+  const res = await $api.get('/employee/employees/', {
+    params: {
+      size: 1000,
+    },
+  });
   return res.data;
 };
 
-const EmployeesSelect: React.FC<Props> = ({ title, placeholder, value, onChange }) => {
+const EmployeesSelect: React.FC<Props> = ({ title, placeholder, value, onChange, position }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const inputRef = React.useRef<HTMLInputElement>(null);
@@ -54,6 +59,11 @@ const EmployeesSelect: React.FC<Props> = ({ title, placeholder, value, onChange 
     }
   };
 
+  const mappingArr = () => {
+    const res = data?.results.filter((el: any) => el?.position == position);
+    return res;
+  };
+
   if (isLoading) return <Loader2 className='spin-in' />;
 
   return (
@@ -76,7 +86,7 @@ const EmployeesSelect: React.FC<Props> = ({ title, placeholder, value, onChange 
             <SelectValue placeholder={placeholder} />
           </SelectTrigger>
           <SelectContent className='bg-[#131520]'>
-            {data?.results.map((el: any) => (
+            {mappingArr()?.map((el: any) => (
               <SelectItem key={el.id} value={el.id}>
                 {el?.first_name} {el?.last_name}
               </SelectItem>
