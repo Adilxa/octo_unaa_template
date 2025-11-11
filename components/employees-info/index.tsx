@@ -104,7 +104,7 @@ const EmployeesInfo = () => {
   const page: any = searchParams.get('page');
 
   const { data, isLoading } = useQuery({
-    queryKey: ['employeeList', search],
+    queryKey: ['employeeList', search, page, size],
     queryFn: () => fetchEmployees(search, page, size),
   });
 
