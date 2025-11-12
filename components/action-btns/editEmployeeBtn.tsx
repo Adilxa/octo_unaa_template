@@ -47,8 +47,8 @@ const EditEmployeeBtn: React.FC<Props> = ({ id, onSuccess }) => {
   const [phone, setPhone] = useState('');
   const [position, setPosition] = useState<any>('');
   const [fillial, setFillial] = useState<any>('');
-  const [salary, setSalary] = useState('');
-  const [procentageGraph, setProcentageGraph] = useState('');
+  const [baseSalary, setBaseSalary] = useState(''); // Оклад
+  const [procentageGraph, setProcentageGraph] = useState(''); // Процент
   const [status, setStatus] = useState('active');
   const [description, setDescription] = useState('');
 
@@ -112,12 +112,12 @@ const EditEmployeeBtn: React.FC<Props> = ({ id, onSuccess }) => {
       }
       setPhone(phoneNumber);
 
-      setSalary(data.commission_rate || data.salary || '0.00');
-      setStatus(data.status === 'True' ? 'active' : 'inactive');
-      setDescription(data.description || '');
+      // Устанавливаем оклад и процент
+      setBaseSalary(data.salary || '');
+      setProcentageGraph(data.commission_rate || '');
 
-      // Установим значение графика работы из данных
-      setProcentageGraph(data.salary || '0.00');
+      setStatus(data.status === 'True' || data.status === 'active' ? 'active' : 'inactive');
+      setDescription(data.description || '');
 
       // Сбрасываем ошибки при загрузке данных
       setErrors({});
@@ -311,8 +311,9 @@ const EditEmployeeBtn: React.FC<Props> = ({ id, onSuccess }) => {
         phone: phone.replace(/\s/g, ''), // Удаляем пробелы перед отправкой
         position: position,
         branch: fillial,
-        is_active: status === 'active',
-        commission_rate: salary,
+        status: status,
+        salary: baseSalary || '', // Оклад
+        commission_rate: procentageGraph || '', // Процент
         description: description,
       });
 
@@ -332,6 +333,7 @@ const EditEmployeeBtn: React.FC<Props> = ({ id, onSuccess }) => {
       }
     } catch (error: any) {
       console.error('Update error:', error);
+      console.error('Error response:', error.response?.data);
       toast('Ошибка при обновлении сотрудника');
     }
   };
@@ -349,14 +351,8 @@ const EditEmployeeBtn: React.FC<Props> = ({ id, onSuccess }) => {
     }
   };
 
-  // Stop propagation for all clicks inside the dialog
-  const handleDialogClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-  };
-
   // Обработчик для кнопки "Изменить"
   const handleTriggerClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
     setOpen(true);
   };
 
@@ -380,13 +376,6 @@ const EditEmployeeBtn: React.FC<Props> = ({ id, onSuccess }) => {
         <DialogContent
           ref={dialogRef}
           className='fixed left-[50%] top-[50%] z-50 w-full max-w-[700px] translate-x-[-50%] translate-y-[-50%] rounded-xl bg-[#131520] px-10 py-10'
-          onClick={handleDialogClick}
-          onKeyDown={e => {
-            // Предотвращаем действие по умолчанию для пробела внутри диалога
-            if (e.key === ' ') {
-              e.stopPropagation();
-            }
-          }}
         >
           {isLoading ? (
             <div className='flex items-center justify-center py-8'>
@@ -425,16 +414,8 @@ const EditEmployeeBtn: React.FC<Props> = ({ id, onSuccess }) => {
                   После изменения информации <br /> обязательно нажмите кнопку сохранить
                 </p>
               </DialogHeader>
-              <div
-                className={'flex flex-col gap-5'}
-                onClick={e => e.stopPropagation()}
-                onKeyDown={e => {
-                  // Предотвращаем обработку пробела на уровне формы
-                  if (e.key === ' ') {
-                    e.stopPropagation();
-                  }
-                }}
-              >
+
+              <div className={'mt-5 flex flex-col gap-5'}>
                 <div>
                   <FormInput
                     title={'Фамилия Имя'}
@@ -489,17 +470,27 @@ const EditEmployeeBtn: React.FC<Props> = ({ id, onSuccess }) => {
                   {errors.fillial && <p className='mt-1 text-sm text-red-500'>{errors.fillial}</p>}
                 </div>
 
-                <FormInput
-                  title={'Зарплата в процентах %'}
-                  placeholder={'Введите процент с заказа'}
-                  value={salary}
-                  onChange={setSalary}
-                />
+                <div>
+                  <FormInput
+                    title={'Оклад'}
+                    placeholder={'Введите фиксированную сумму оклада'}
+                    value={baseSalary}
+                    onChange={setBaseSalary}
+                    type='number'
+                  />
+                </div>
 
-                <div
-                  className='flex items-center justify-between gap-[10rem]'
-                  onClick={e => e.stopPropagation()}
-                >
+                <div>
+                  <FormInput
+                    title={'Зарплата в процентах %'}
+                    placeholder={'Введите процент с заказа'}
+                    value={procentageGraph}
+                    onChange={setProcentageGraph}
+                    type='number'
+                  />
+                </div>
+
+                <div className='flex items-center justify-between gap-[10rem]'>
                   <Label className={'w-[60px]'}>Статус</Label>
                   <RadioGroup value={status} onValueChange={setStatus} className='flex gap-5'>
                     <div className='flex items-center space-x-2'>
@@ -512,13 +503,16 @@ const EditEmployeeBtn: React.FC<Props> = ({ id, onSuccess }) => {
                     </div>
                   </RadioGroup>
                 </div>
-                <FormInput
-                  title={'Примечание'}
-                  placeholder={'Опциональное поле'}
-                  value={description}
-                  onChange={setDescription}
-                  isTextArea={true}
-                />
+
+                <div>
+                  <FormInput
+                    title={'Примечание'}
+                    placeholder={'Опциональное поле'}
+                    value={description}
+                    onChange={setDescription}
+                    isTextArea={true}
+                  />
+                </div>
               </div>
             </>
           )}

@@ -29,6 +29,7 @@ const NewEmployeeBtn = () => {
   const [procentageGraph, setProcentageGraph] = useState('');
   const [status, setStatus] = useState('active');
   const [description, setDescription] = useState('');
+  const [baseSalary, setBaseSalary] = useState(''); // Новое поле для оклада
 
   // Функция для сброса всех полей формы
   const resetForm = () => {
@@ -40,6 +41,7 @@ const NewEmployeeBtn = () => {
     setProcentageGraph('');
     setStatus('active');
     setDescription('');
+    setBaseSalary(''); // Сброс оклада
   };
 
   // Проверка валидности формы перед отправкой
@@ -59,7 +61,7 @@ const NewEmployeeBtn = () => {
     }
 
     // Проверка, что все обязательные поля заполнены
-    if (!position || !fillial || !salary) {
+    if (!position || !fillial) {
       toast('Заполните все обязательные поля');
       return false;
     }
@@ -80,7 +82,8 @@ const NewEmployeeBtn = () => {
         phone: phone,
         position: position,
         branch: fillial,
-        commission_rate: salary,
+        commission_rate: procentageGraph || "0",
+        salary: baseSalary || '0',
         status: status,
         description: description,
       });
@@ -202,11 +205,16 @@ const NewEmployeeBtn = () => {
             onChange={setFillial}
           />
           <FormInput
+            title={'Оклад'}
+            placeholder={'Введите фиксированную сумму оклада'}
+            value={baseSalary}
+            onChange={setBaseSalary}
+          />
+          <FormInput
             title={'Зарплата в процентах %'}
             placeholder={'Введите процент с заказа'}
-            value={salary}
-            onChange={setSalary}
-            validation={{ required: true }}
+            value={procentageGraph}
+            onChange={setProcentageGraph}
           />
           <div className='flex items-center justify-between gap-[10rem]'>
             <Label className={'w-[60px]'}>
