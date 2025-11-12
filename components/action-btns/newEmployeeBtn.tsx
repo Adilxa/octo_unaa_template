@@ -82,7 +82,7 @@ const NewEmployeeBtn = () => {
         phone: phone,
         position: position,
         branch: fillial,
-        commission_rate: procentageGraph || "0",
+        commission_rate: procentageGraph || '0',
         salary: baseSalary || '0',
         status: status,
         description: description,
